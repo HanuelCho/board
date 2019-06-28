@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member_mapper">
+
+	<resultMap type="kh.spring.dto.JoinDTO" id="JoinDTO">
+		<result property="name" column="member_name"></result>
+		<result property="id" column="email"></result>
+		<result property="pw" column="member_pw"></result>
+	</resultMap>
+
+	<insert id="insert">
+		insert into member values(#{name},#{id},#{pw})
+	</insert>
+
+
+	<select id="login" resultType="Integer">
+		select count(*) from member where email=#{id} and member_pw=#{pw}
+	</select>
+
+	<select id="idch" resultType="Integer">
+		select count(*) from member where email=#{id}
+	</select>
+	<select id="memberInfo" resultMap="JoinDTO">
+		select * from member where email=#{value}
+	</select>
+	
+
+</mapper>
